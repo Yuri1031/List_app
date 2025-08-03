@@ -1,0 +1,173 @@
+* {
+  box-sizing: border-box;
+}
+
+
+body{
+    min-width: 70%;
+    background-color: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contents{
+    width: 60%;
+    max-width: 600px;
+    min-width: 500px;
+    background-color: white;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 50px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
+}
+.header{
+    width: 100%;
+    display: flex;
+}
+.head{
+    all: unset;
+    width: 50%;
+    text-align: center;
+    padding: 10px;
+}
+.tab_work{
+    background-color: #77BEF0 ;
+    color: white;
+}
+.tab_life{
+    background-color: #FFCB61 ;
+    color: white;
+}
+.tab_hobby{
+    background-color: #FF894F ;
+    color: white;
+}
+.head:hover, .btn:hover {
+    background-color: #EA5B6F;
+}
+.head.active, .btn.active{
+    background-color: #EA5B6F;
+    color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+.main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+}
+
+
+/**** add  ****/
+.add_list{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.add_list input{
+    width: 100%;
+    height: 40px;
+    padding: 5px 15px;
+    border: #D9D9D9 solid;
+    border-radius: 10px;
+}
+
+
+/**** list ****/
+.main_list{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.list{
+    display: none;
+}
+.list.active{
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+.todo_lists, .subtask_lists{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+.task{
+    width: 100%;
+    border: #D9D9D9 solid;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    margin-bottom: 5px;
+}
+.task_area{
+    width: 100%;
+    height: 40px;
+    list-style: none; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    padding: 5px 15px;
+}
+.task_group{
+    width: 90%;
+    height: auto;
+    display: flex;
+}
+.task_text{
+    margin-left: 8px;
+}
+.del, .group{
+    all: unset;
+    font-size: 15px;
+    color: #D9D9D9;
+    display: flex;
+    align-items: center;
+}
+.del:hover, .group:hover{
+    color: #EA5B6F;
+}
+/** subtask **/
+.subtask_area{
+    width: 100%;
+    padding-left: 30px;
+}
+.add_subtask{
+    margin-bottom: 10px;
+}
+.add_subtask input{
+    width: 100%;
+    height: 35px;
+    padding: 5px 15px;
+    border: #D9D9D9 solid;
+    border-radius: 10px;
+}
+.subtask{
+    width: 100%;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    border: #D9D9D9 solid;
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+}

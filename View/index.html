@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="../CSS/design.css">
+    <script src = "../JS/switch.js" defer></script>
+    <title>ToDo list</title>
+  </head>
+
+  <body>
+    <div class="contents">
+        <div class="header">
+            <button class="head tab_work" id="tabWork">Work</button>
+            <button class="head tab_life" id="tabLife">Life</button>
+            <button class="head tab_hobby" id="tabHobby">Hobby</button>
+        </div>
+
+        <div class="main">
+          <div class="add_list">
+            <input type="text" placeholder="add your task and push the enter" id="add_task">
+          </div>
+
+          <div class="main_list">
+            <div class="list work-list active">
+              <ul class="todo-lists">
+                <li class="task">
+                  <div class="task_area">
+                    <div class="task_group">
+                      <button class="del">✔︎</button>
+                      <span class="task_text">ttttttttttt</span>
+                    </div>
+                    <div class="sub_task_group">
+                      <button class="group">+</button>
+                      <button class="toggle_btn hidden">▼</button>
+                    </div>   
+                  </div>
+                               
+                  <!-- sub task area hidden -->  
+                  <div class="subtask_area hidden">
+                    <div class="add_subtask">
+                      <input type="text" placeholder="add your subtask and push the enter" id="add_subtask">
+                    </div>
+                    
+                    <ul class="subtask_lists">
+                      <li class="subtask">
+                        <button class="del">✔︎</button>
+                        <span class="task_text">ttttttttttt</span>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+
+            <div class="list life-list"></div>
+            <div class="list hobby-list"></div>
+          </div>
+        </div>
+    </div>
+  </body>
+
+  
+
+</html>

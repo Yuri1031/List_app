@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="../CSS/design.css">
     <script src = "../JS/switch.js" defer></script>
+    <script src = "../JS/todo.js" defer></script>
     <title>ToDo list</title>
   </head>
 
@@ -23,7 +24,8 @@
 
           <div class="main_list">
             <div class="list work-list active">
-              <ul class="todo-lists">
+              <ul class="todo_lists" id="todo_lists">
+                <!--
                 <li class="task">
                   <div class="task_area">
                     <div class="task_group">
@@ -32,24 +34,25 @@
                     </div>
                     <div class="sub_task_group">
                       <button class="group">+</button>
-                      <button class="toggle_btn hidden">▼</button>
+                      <button class="toggle_btn">▼</button>
                     </div>   
                   </div>
                                
-                  <!-- sub task area hidden -->  
-                  <div class="subtask_area hidden">
+                  /* sub task area hidden*/  
+                  <div class="subtask_area">
                     <div class="add_subtask">
-                      <input type="text" placeholder="add your subtask and push the enter" id="add_subtask">
+                      <input type="text" placeholder="add your subtask and push the enter" id="input_subtask">
                     </div>
                     
                     <ul class="subtask_lists">
                       <li class="subtask">
                         <button class="del">✔︎</button>
-                        <span class="task_text">ttttttttttt</span>
+                        <span class="subtask_text">ttttttttttt</span>
                       </li>
                     </ul>
                   </div>
                 </li>
+                -->
               </ul>
             </div>
 
@@ -60,7 +63,4 @@
         </div>
     </div>
   </body>
-
-  
-
 </html>

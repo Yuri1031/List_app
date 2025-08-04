@@ -133,23 +133,32 @@ ul {
     height: auto;
     display: flex;
 }
-.task_text{
+.task_text,.subtask_text{
     margin-left: 8px;
 }
-.del, .group{
+.del, .group, .toggle_btn:active{
     all: unset;
     font-size: 15px;
     color: #D9D9D9;
     display: flex;
     align-items: center;
 }
+.toggle_btn{
+    display: none;
+}
 .del:hover, .group:hover{
     color: #EA5B6F;
 }
+
 /** subtask **/
 .subtask_area{
+    display: none;
+}
+.subtask_area.active{
+    display: block;
     width: 100%;
     padding-left: 30px;
+    padding-right: 15px;
 }
 .add_subtask{
     margin-bottom: 10px;

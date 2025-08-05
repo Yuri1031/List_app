@@ -31,23 +31,36 @@ body{
     width: 50%;
     text-align: center;
     padding: 10px;
+    font-weight: bold;
 }
 .tab_work{
+    background-color: #D5E9FD ;
+    color: #77BEF0;
+}
+.tab_work:hover,.tab_work.active{
     background-color: #77BEF0 ;
     color: white;
 }
 .tab_life{
+    background-color: #FFECCA  ;
+    color: #FFCB61;
+}
+.tab_life:hover, .tab_life.active{
     background-color: #FFCB61 ;
     color: white;
 }
 .tab_hobby{
+    background-color: #FFD9C8 ;
+    color: #FF894F;
+}
+.tab_hobby:hover, .tab_hobby.active{
     background-color: #FF894F ;
     color: white;
 }
-.head:hover, .btn:hover {
+.btn:hover {
     background-color: #EA5B6F;
 }
-.head.active, .btn.active{
+.btn.active{
     background-color: #EA5B6F;
     color: white;
 }

@@ -12,9 +12,9 @@
   <body>
     <div class="contents">
         <div class="header">
-            <button class="head tab_work" id="tabWork">Work</button>
-            <button class="head tab_life" id="tabLife">Life</button>
-            <button class="head tab_hobby" id="tabHobby">Hobby</button>
+            <button class="head tab_work active" id="tabWork" data-target="work-list">Work</button>
+            <button class="head tab_life" id="tabLife" data-target="life-list">Life</button>
+            <button class="head tab_hobby" id="tabHobby" data-target="hobby-list">Hobby</button>
         </div>
 
         <div class="main">
@@ -24,7 +24,7 @@
 
           <div class="main_list">
             <div class="category work-list active" data-type="work">
-              <ul class="todo_lists" id="todo_lists">
+              <ul class="todo_lists">
                 <!--
                 <li class="task">
                   <div class="task_area">
@@ -57,8 +57,13 @@
             </div>
 
 
-            <div class="category life-list" data-type="life"></div>
-            <div class="category hobby-list" data-type="hobby"></div>
+            <div class="category life-list" data-type="life">
+              <ul class="todo_lists"></ul>
+            </div>
+
+            <div class="category hobby-list" data-type="hobby">
+              <ul class="todo_lists"></ul>
+            </div>
           </div>
         </div>
     </div>

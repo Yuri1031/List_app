@@ -1,10 +1,9 @@
 console.log('connected to todo.js!');
 
 const textInput = document.getElementById("add_task");
-const todoLists = document.getElementById("todo_lists");
 
 /////////////////////////////////////////////
-function createTaskLists(text, subtasks = [], targetList = todoLists){
+function createTaskLists(text, targetList, subtasks = []){
     const li = document.createElement("li");
     li.classList.add("task");
 
@@ -40,7 +39,7 @@ function createTaskLists(text, subtasks = [], targetList = todoLists){
     taskGroup.appendChild(taskText);
     subTaskGroup.appendChild(groupBtn);
     subTaskGroup.appendChild(toggleBtn); 
-    todoLists.appendChild(li);
+    targetList.appendChild(li);
 
     // button setting
     delBtn.addEventListener("click", () => {
@@ -222,12 +221,17 @@ function loadTaskStorage(){
         categoryTasks = saveTasks[type] || [];
 
         categoryTasks.forEach(task => {
-            createTaskLists(task.title, task.subtasks, taskList);
+            createTaskLists(task.title, taskList, task.subtasks);
         });
         
     });
 }
 
+// CurrentCategory
+function getCurrentCategory (){
+    const activeCategory = document.querySelector(".category.active");
+    return activeCategory?.dataset.type || "work";
+}
 /////////////////////////////////////////////
 window.addEventListener("DOMContentLoaded", () => {
     loadTaskStorage();
@@ -239,7 +243,11 @@ textInput.addEventListener("keydown", enter =>{
         return;
     }
 
-    createTaskLists(text);
+    const currentCategory = getCurrentCategory();
+    const targetCategory = document.querySelector(`.category[data-type="${currentCategory}"]`);
+    const targetList = targetCategory.querySelector(".todo_lists");
+
+    createTaskLists(text, targetList);
     saveTaskToStorage(); 
     textInput.value="";  
 });

@@ -4,7 +4,7 @@ const textInput = document.getElementById("add_task");
 const todoLists = document.getElementById("todo_lists");
 
 /////////////////////////////////////////////
-function createTaskLists(text){
+function createTaskLists(text, subtasks = [], targetList = todoLists){
     const li = document.createElement("li");
     li.classList.add("task");
 
@@ -45,7 +45,6 @@ function createTaskLists(text){
     // button setting
     delBtn.addEventListener("click", () => {
         li.remove();
-        saveTaskToStorage();
     });
 
     let subTaskArea = null;
@@ -97,14 +96,12 @@ function createTaskLists(text){
             subTaskArea.classList.add("active");
             subInput.focus();
             updateGroupBtn();
-            saveTaskToStorage()
 
             subInput.addEventListener("keydown", e =>{
                 const subtext = subInput.value.trim();
                 if(subtext == "" || e.key !== "Enter"){
                     return
                 }
-                console.log(subInput.value);
 
                 // create subtask
                 const subTask = document.createElement("li");
@@ -122,9 +119,9 @@ function createTaskLists(text){
                 subTask.appendChild(subTaskText);
                 subTaskLists.appendChild(subTask);
                 
-                saveTaskToStorage()
                 subInput.value="";
                 updateGroupBtn(); 
+                saveTaskToStorage();
 
                 // button setting
                 delBtn.addEventListener("click", () => {
@@ -135,65 +132,106 @@ function createTaskLists(text){
             })
         }
     });
-    return li;
-}
 
-// localStorage
-function saveTaskToStorage(){
-    const todos = [];
-    document.querySelectorAll(".task").forEach(task => {
-        const taskText = task.querySelector(".task_text").textContent;
-        const subTaskTexts = [];
+    if (subtasks.length > 0) {
+        // subTaskArea が未定義なら作成
+        if (!subTaskArea) {
+            subTaskArea = document.createElement("div");
+            subTaskArea.classList.add("subtask_area");
 
-        task.querySelectorAll(".subtask_text").forEach(subtask => {
-            subTaskTexts.push(subtask.textContent);
-        });
+            const addSubTask = document.createElement("div");
+            addSubTask.classList.add("add_subtask");
 
-        todos.push({
-            text: taskText,
-            subtasks: subTaskTexts
-        });
-    });
-    localStorage.setItem("todos", JSON.stringify(todos));
-}
+            subInput = document.createElement("input");
+            subInput.type = "text";
+            subInput.placeholder = "add your subtask and push the enter";
+            subInput.classList.add("input_subtask"); 
 
-function saveSubtaskToStorage(){
-    const todos = [];
-    document.querySelectorAll(".subtask_text").forEach(subtask => {
-        todos.push(subtask.textContent);
-    });
-    localStorage.setItem("todos", JSON.stringify(todos));
-}
+            const subTaskLists = document.createElement("ul");
+            subTaskLists.classList.add("subtask_lists");
 
-function showTask(){
-    const savedTodos = JSON.parse(localStorage.getItem("todos"))|| [];
-    console.log(savedTodos);
-}
-
-function loadTaskStorage() {
-    const todos = JSON.parse(localStorage.getItem("todos"))|| [];
-    todos.forEach(todo => {
-        const li = createTaskLists(todo.text);
-
-        // サブタスクを追加
-        if (todo.subtasks && Array.isArray(todo.subtasks)) {
-            todo.subtasks.forEach(sub =>{
-                const event = new Event('click');
-                li.querySelector(".group").dispatchEvent(event);
-
-                const input = li.querySelector(".input_subtask");
-                input.value = sub;
-
-                const enterEvent = new KeyboardEvent("keydown", { key: "Enter" });
-                input.dispatchEvent(enterEvent);
-            });
+            subTaskArea.appendChild(addSubTask);
+            subTaskArea.appendChild(subTaskLists);
+            addSubTask.appendChild(subInput); 
+            li.appendChild(subTaskArea);
         }
+
+        // subtaskを描画
+        const subTaskLists = subTaskArea.querySelector(".subtask_lists");
+
+        subtasks.forEach(subtext => {
+            const subTask = document.createElement("li");
+            subTask.classList.add("subtask");
+
+            const delBtn = document.createElement("button");
+            delBtn.classList.add("del");
+            delBtn.textContent = "✔︎";
+
+            const subTaskText = document.createElement("span");
+            subTaskText.classList.add("subtask_text");
+            subTaskText.textContent = subtext;
+
+            subTask.appendChild(delBtn);
+            subTask.appendChild(subTaskText);
+            subTaskLists.appendChild(subTask);
+
+            delBtn.addEventListener("click", () => {
+                subTask.remove();
+                saveTaskToStorage();
+                updateGroupBtn(); 
+            });
+        });
+
+        // 表示切替ボタン処理
+        subTaskArea.classList.add("active");
+        updateGroupBtn();
+    }
+}
+
+
+
+// // localStorage
+function saveTaskToStorage(){
+    const data = {};
+    document.querySelectorAll(".category").forEach(category => {
+        const type = category.dataset.type;
+        const taskEls = category.querySelectorAll(".task");
+        const taskArray = [];
+
+        taskEls.forEach(taskEl => {
+            const title = taskEl.querySelector(".task_text").textContent;
+            const subtasks = [];
+
+            taskEl.querySelectorAll(".subtask_text").forEach(subEl => {
+                subtasks.push(subEl.textContent);
+            });
+
+            taskArray.push({ title, subtasks });
+        });
+        data[type] = taskArray;
+    });
+    localStorage.setItem("tasks", JSON.stringify(data));
+}
+
+function loadTaskStorage(){
+    const saveTasks = JSON.parse(localStorage.getItem("tasks")) || {};
+
+    document.querySelectorAll(".category").forEach(category => {
+        const type = category.dataset.type;
+        const taskList = category.querySelector(".todo_lists");
+        categoryTasks = saveTasks[type] || [];
+
+        categoryTasks.forEach(task => {
+            createTaskLists(task.title, task.subtasks, taskList);
+        });
+        
     });
 }
+
+/////////////////////////////////////////////
 window.addEventListener("DOMContentLoaded", () => {
     loadTaskStorage();
 });
-/////////////////////////////////////////////
 
 textInput.addEventListener("keydown", enter =>{
     const text = textInput.value.trim();
@@ -202,6 +240,6 @@ textInput.addEventListener("keydown", enter =>{
     }
 
     createTaskLists(text);
-    saveTaskToStorage()
+    saveTaskToStorage(); 
     textInput.value="";  
 });

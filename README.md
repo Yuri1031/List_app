@@ -16,12 +16,15 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
 モチベーションを高める「ブーストモード」の詳しい内容は、以下に記させていただきます:)
 <br>
 
+-->
+<!--
+
 ## ⚪︎詳細
 ### ⚪︎機能一覧
 <table width="100%" cellspacing="10">
   <tr>
     <td width="50%" align="center"><b>タイマー機能</b></td>
-    <!-- <td width="50%" align="center"><b></b></td> -->
+    <td width="50%" align="center"><b></b></td>
   </tr>
   <tr>
     <td width="50%"><img src="https://github.com/user-attachments/assets/77239507-bf55-4f3d-89dc-ba2d9fd5ee4f" width="100%"></td>
@@ -96,3 +99,5 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
 </details>
 <br>
 
+
+-->

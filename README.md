@@ -1,4 +1,4 @@
-# ⚪︎ToDo List 機能　（readme 作成中）
+# ⚪︎ToDo List 機能　（作成中）
 <br>
 
 

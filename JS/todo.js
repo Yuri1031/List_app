@@ -44,6 +44,8 @@ function createTaskLists(text, targetList, subtasks = []){
     // button setting
     delBtn.addEventListener("click", () => {
         li.remove();
+        saveTaskToStorage();
+        updateGroupBtn(); 
     });
 
     let subTaskArea = null;
@@ -99,7 +101,7 @@ function createTaskLists(text, targetList, subtasks = []){
             subInput.addEventListener("keydown", e =>{
                 const subtext = subInput.value.trim();
                 if(subtext == "" || e.key !== "Enter"){
-                    return
+                    return;
                 }
 
                 // create subtask

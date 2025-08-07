@@ -82,10 +82,11 @@ function createTaskLists(text, targetList, subtasks = []){
             subInput = document.createElement("input");
             subInput.type = "text";
             subInput.placeholder = "add your subtask and push the enter";
+            document.querySelector('input[name="subtask"]');
             subInput.classList.add("input_subtask"); 
 
             const subTaskLists = document.createElement("ul");
-             subTaskLists.classList.add("subtask_lists");
+            subTaskLists.classList.add("subtask_lists");
             
             subTaskArea.appendChild(addSubTask);
             subTaskArea.appendChild(subTaskLists);
@@ -118,6 +119,7 @@ function createTaskLists(text, targetList, subtasks = []){
 
                 subTask.appendChild(delBtn);
                 subTask.appendChild(subTaskText);
+                const subTaskLists = subTaskArea.querySelector(".subtask_lists");
                 subTaskLists.appendChild(subTask);
                 
                 subInput.value="";
@@ -175,6 +177,10 @@ function createTaskLists(text, targetList, subtasks = []){
             subTask.appendChild(delBtn);
             subTask.appendChild(subTaskText);
             subTaskLists.appendChild(subTask);
+
+            subInput.value = "";
+            updateGroupBtn();
+            saveTaskToStorage();
 
             delBtn.addEventListener("click", () => {
                 subTask.remove();

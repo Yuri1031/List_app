@@ -2,9 +2,13 @@ console.log('connected to todo.js!');
 
 const textInput = document.getElementById("add_task");
 
-/////////////////////////////////////////////
+
+
+// ------------------------------
+// function
+// ------------------------------
 function createTaskLists(text, targetList, subtasks = []){
-    const li = document.createElement("li");
+  const li = document.createElement("li");
     li.classList.add("task");
 
     const taskArea = document.createElement("div");
@@ -41,163 +45,112 @@ function createTaskLists(text, targetList, subtasks = []){
     subTaskGroup.appendChild(toggleBtn); 
     targetList.appendChild(li);
 
-    // button setting
-    delBtn.addEventListener("click", () => {
-        li.remove();
-        saveTaskToStorage();
-        updateGroupBtn(); 
-    });
+    DelBtn(delBtn, li);
 
-    let subTaskArea = null;
-    let subInput = null;
+    GroupBtnSetting(groupBtn, li, subtasks);
 
-    function updateGroupBtn(){
-        if (subTaskArea && subTaskArea.classList.contains("active")) {
-            const hasSubTasks = subTaskArea.querySelector(".subtask_text");
-            groupBtn.textContent = hasSubTasks ? "▲" : "+";
-        } else if (subTaskArea) {
-            const hasSubTasks = subTaskArea.querySelector(".subtask_text");
-            groupBtn.textContent = hasSubTasks ? "▼" : "+";
-        } else {
-            groupBtn.textContent = "+";
-        }
-    }
-    
-    groupBtn.addEventListener("click",()=>{
-        if(subTaskArea){
-            if (subTaskArea.classList.contains("active")) {
-                subTaskArea.classList.remove("active");
-            } else {
-                subTaskArea.classList.add("active");
-                subInput.focus();
-            }
-            updateGroupBtn(); 
-        } else {
-            subTaskArea = document.createElement("div");
-            subTaskArea.classList.add("subtask_area");
+}
 
-            const addSubTask = document.createElement("div");
-            addSubTask.classList.add("add_subtask");
+function createSubtaskArea (){
+  const subTaskArea = document.createElement("div");
+  subTaskArea.classList.add("subtask_area");
 
-            subInput = document.createElement("input");
-            subInput.type = "text";
-            subInput.placeholder = "add your subtask and push the enter";
-            document.querySelector('input[name="subtask"]');
-            subInput.classList.add("input_subtask"); 
+  const addSubTask = document.createElement("div");
+  addSubTask.classList.add("add_subtask");
 
-            const subTaskLists = document.createElement("ul");
-            subTaskLists.classList.add("subtask_lists");
-            
-            subTaskArea.appendChild(addSubTask);
-            subTaskArea.appendChild(subTaskLists);
-            addSubTask.appendChild(subInput); 
-            
-            
-            li.appendChild(subTaskArea);
+  const subInput = document.createElement("input");
+  subInput.type = "text";
+  subInput.placeholder = "add your subtask and push the enter";
+  subInput.classList.add("input_subtask");
 
-            subTaskArea.classList.add("active");
-            subInput.focus();
-            updateGroupBtn();
+  const subTaskList = document.createElement("ul");
+  subTaskList.classList.add("subtask_lists");
 
-            subInput.addEventListener("keydown", e =>{
-                const subtext = subInput.value.trim();
-                if(subtext == "" || e.key !== "Enter"){
-                    return;
-                }
+  addSubTask.appendChild(subInput);
+  subTaskArea.appendChild(addSubTask);
+  subTaskArea.appendChild(subTaskList);
 
-                // create subtask
-                const subTask = document.createElement("li");
-                subTask.classList.add("subtask");
+  return subTaskArea;
+}
 
-                const delBtn = document.createElement("button");
-                delBtn.classList.add("del");
-                delBtn.textContent = "✔︎";
+function createSubtaskLists(subtext, subTaskListUl, updateGroupBtn){
+  const subTask = document.createElement("li");
+  subTask.classList.add("subtask");
 
-                const subTaskText = document.createElement("span");
-                subTaskText.classList.add("subtask_text");
-                subTaskText.textContent = subtext;
+  const delBtn = document.createElement("button");
+  delBtn.classList.add("del");
+  delBtn.textContent = "✔︎";
 
-                subTask.appendChild(delBtn);
-                subTask.appendChild(subTaskText);
-                const subTaskLists = subTaskArea.querySelector(".subtask_lists");
-                subTaskLists.appendChild(subTask);
-                
-                subInput.value="";
-                updateGroupBtn(); 
-                saveTaskToStorage();
+  const subTaskText = document.createElement("span");
+  subTaskText.classList.add("subtask_text");
+  subTaskText.textContent = subtext;
 
-                // button setting
-                delBtn.addEventListener("click", () => {
-                    subTask.remove();
-                    saveTaskToStorage();
-                    updateGroupBtn(); 
-                });
-            })
-        }
-    });
+  subTask.appendChild(delBtn);
+  subTask.appendChild(subTaskText);
+  subTaskListUl.appendChild(subTask);
 
-    if (subtasks.length > 0) {
-        // subTaskArea が未定義なら作成
-        if (!subTaskArea) {
-            subTaskArea = document.createElement("div");
-            subTaskArea.classList.add("subtask_area");
-
-            const addSubTask = document.createElement("div");
-            addSubTask.classList.add("add_subtask");
-
-            subInput = document.createElement("input");
-            subInput.type = "text";
-            subInput.placeholder = "add your subtask and push the enter";
-            subInput.classList.add("input_subtask"); 
-
-            const subTaskLists = document.createElement("ul");
-            subTaskLists.classList.add("subtask_lists");
-
-            subTaskArea.appendChild(addSubTask);
-            subTaskArea.appendChild(subTaskLists);
-            addSubTask.appendChild(subInput); 
-            li.appendChild(subTaskArea);
-        }
-
-        // subtaskを描画
-        const subTaskLists = subTaskArea.querySelector(".subtask_lists");
-
-        subtasks.forEach(subtext => {
-            const subTask = document.createElement("li");
-            subTask.classList.add("subtask");
-
-            const delBtn = document.createElement("button");
-            delBtn.classList.add("del");
-            delBtn.textContent = "✔︎";
-
-            const subTaskText = document.createElement("span");
-            subTaskText.classList.add("subtask_text");
-            subTaskText.textContent = subtext;
-
-            subTask.appendChild(delBtn);
-            subTask.appendChild(subTaskText);
-            subTaskLists.appendChild(subTask);
-
-            subInput.value = "";
-            updateGroupBtn();
-            saveTaskToStorage();
-
-            delBtn.addEventListener("click", () => {
-                subTask.remove();
-                saveTaskToStorage();
-                updateGroupBtn(); 
-            });
-        });
-
-        // 表示切替ボタン処理
-        subTaskArea.classList.add("active");
-        updateGroupBtn();
-    }
+  DelBtn(delBtn, subTask, updateGroupBtn);
 }
 
 
+function DelBtn(delBtn, li, updateGroupBtn) {
+  delBtn.addEventListener("click", () => {
+    li.remove();
+    saveTaskToStorage();
+    if (typeof updateGroupBtn === "function") {
+      updateGroupBtn();
+    }
+  });
+}
 
-// // localStorage
+
+function GroupBtnSetting(groupBtn, taskLi, subtasks) {
+  let subTaskArea = null;
+  let subInput = null;
+
+  function updateGroupBtn(){
+    if (subTaskArea && subTaskArea.classList.contains("active")) {
+        const hasSubTasks = subTaskArea.querySelector(".subtask_text");
+        groupBtn.textContent = hasSubTasks ? "▲" : "+";
+    } else if (subTaskArea) {
+        const hasSubTasks = subTaskArea.querySelector(".subtask_text");
+        groupBtn.textContent = hasSubTasks ? "▼" : "+";
+    } else {
+        groupBtn.textContent = "+";
+    }
+  };
+
+  groupBtn.addEventListener("click", () => {
+    if (!subTaskArea) {
+      subTaskArea = createSubtaskArea();
+      subInput = subTaskArea.querySelector("input");
+      const subList = subTaskArea.querySelector("ul");
+      taskLi.appendChild(subTaskArea);
+
+      // 入力イベント設定
+      inputEnterSetting(subInput, (e) => {
+        const subtext = subInput.value.trim();
+        if (subtext === "" || e.key !== "Enter") return;
+        createSubtaskLists(subtext, subList, updateGroupBtn);
+        subInput.value = "";
+        updateGroupBtn();
+        saveTaskToStorage();
+      });
+
+      // 保存されていたsubtaskを復元
+      if (subtasks && subtasks.length > 0) {
+        subtasks.forEach(sub => createSubtaskLists(sub, subList, updateGroupBtn));
+      }
+    }
+
+    subTaskArea.classList.toggle("active");
+    if (subInput) subInput.focus();
+    updateGroupBtn();
+  });
+}
+
+
+// localStorage
 function saveTaskToStorage(){
     const data = {};
     document.querySelectorAll(".category").forEach(category => {
@@ -213,7 +166,10 @@ function saveTaskToStorage(){
                 subtasks.push(subEl.textContent);
             });
 
-            taskArray.push({ title, subtasks });
+            const subTaskArea = taskEl.querySelector(".subtask_area");
+            const isOpen = subTaskArea?.classList.contains("active") || false;
+
+            taskArray.push({ title, subtasks, isOpen });
         });
         data[type] = taskArray;
     });
@@ -230,32 +186,68 @@ function loadTaskStorage(){
 
         categoryTasks.forEach(task => {
             createTaskLists(task.title, taskList, task.subtasks);
+
+            const lastTask = taskList.lastElementChild;
+            const groupBtn = lastTask.querySelector(".group");
+
+            // サブタスクがある場合、エリアを事前作成
+            if (task.subtasks.length > 0 || task.isOpen) {
+                groupBtn.click(); // subTaskArea を生成
+                if (!task.isOpen) {
+                    lastTask.querySelector(".subtask_area").classList.remove("active");
+                }
+            }
         });
         
     });
 }
+
 
 // CurrentCategory
 function getCurrentCategory (){
     const activeCategory = document.querySelector(".category.active");
     return activeCategory?.dataset.type || "work";
 }
-/////////////////////////////////////////////
-window.addEventListener("DOMContentLoaded", () => {
-    loadTaskStorage();
-});
 
-textInput.addEventListener("keydown", enter =>{
+
+// Enter setting (日本語入力だとEnter keyが「送信」ではなく入力完了になってしまうから。)
+function inputEnterSetting(inputElement, callback){
+    let isComposing = false;
+
+    inputElement.addEventListener("compositionstart", () => { //ユーザーが変換モードを開始した瞬間
+        isComposing = true;
+    });
+
+    inputElement.addEventListener("compositionend", () => { //変換モードがが終了し、変換が確定された瞬間
+        isComposing = false;
+    });
+
+    inputElement.addEventListener("keydown", (e) => {
+        if (isComposing) return;
+        if (e.key === "Enter") {
+            callback(e);
+        }
+    });
+}
+
+
+
+// ------------------------------
+// 
+// ------------------------------
+window.addEventListener("DOMContentLoaded", () => {
+  loadTaskStorage();
+
+  inputEnterSetting(textInput, () => {
     const text = textInput.value.trim();
-    if(text == "" || enter.key !== "Enter"){
-        return;
-    }
+    if (text === "") return;
 
     const currentCategory = getCurrentCategory();
     const targetCategory = document.querySelector(`.category[data-type="${currentCategory}"]`);
     const targetList = targetCategory.querySelector(".todo_lists");
 
     createTaskLists(text, targetList);
-    saveTaskToStorage(); 
-    textInput.value="";  
+    saveTaskToStorage();
+    textInput.value = "";
+  });
 });

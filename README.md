@@ -22,21 +22,23 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
 そこで、タスクにさらにサブタスクを追加し、トグルリストで視覚的にも分かりやすい機能の実装に至りました。<br>
 詳しい内容は、以下に記させていただきます。よろしければご覧ください:)<br>
 
-<!--
+
 ## ⚪︎詳細
 ### ⚪︎機能一覧
 <table width="100%" cellspacing="10">
   <tr>
-    <td width="50%" align="center"><b>タイマー機能</b></td>
+    <td width="50%" align="center"><b>カテゴリー画面</b></td>
     <td width="50%" align="center"><b></b></td>
   </tr>
   <tr>
-    <td width="50%"><img src="https://github.com/user-attachments/assets/77239507-bf55-4f3d-89dc-ba2d9fd5ee4f" width="100%"></td>
+    <td width="50%"><img src="https://github.com/user-attachments/assets/2995641c-05cb-44d8-9a24-c3cd36a04c71" width="100%"></td>
     <td width="50%"><img src="https://github.com/user-attachments/assets/1fb9be75-fdbc-4ac0-be73-da5b308df40c" width="100%"></td>
   </tr>
   <tr>
-    <td width="50%">「START」「STOP」「RESET」ボタンがあり、タイマー設定後に操作が可能です。ボタンも直感的に使いやすいように工夫しております。</td>
-    <td width="50%">タイマーの設定した時間になると、アラートでお知らせいたします。</td>
+    <td width="50%">
+      「WORK」「LIFE」「HOBBY」の3種類のカテゴリーを作成いたしました。これにより、各カテゴリーに沿ったタスクを管理できます。<br>
+      カテゴリーボタンは、現在選択しているカテゴリーが分かりやすいように、クリック後の色を工夫しております。</td>
+    <td width="50%"></td>
   </tr>
 </table>
 
@@ -88,7 +90,7 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
 </table>
 <br>
 
-
+<!--
 ### ⚪︎工夫した点
 <details>
 <summary>１. ユーザビリティとデザインの工夫</summary>

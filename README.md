@@ -93,20 +93,69 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
 </table>
 <br>
 
-<!--
+
 ### ⚪︎工夫した点
 <details>
 <summary>１. ユーザビリティとデザインの工夫</summary>
-- タイマーやストップウォッチの基本的な機能に加え、ユーザーが次にどのボタンを押すべきか視覚的、尚且つ直感的にわかるように工夫いたしました。
+- クリック動作や、トグルリスト表示等、ユーザーがどのボタンを押すべきか視覚的、尚且つ直感的にわかるように工夫いたしました。<br>
+- 特に、トグルリストボタンは、サブタスクがある場合は「▼」と表示され、ない場合は「+」と表示される仕様になっており、一目でサブタスクがあるのかわかるようになっています。
 </details>
 
 <details>
-<summary>２. ブーストモード</summary>
-- 「ブーストモード」には「ランダム(初期設定)」「偉人名言」「キャラクター名言」とカテゴリー分けされており、ユーザーの気分にあったものを選べるようにしております。<br>
-- タイマーやストップウォッチの本来の機能を損なわせないために、「ブーストモード」ボタンは、あえて控えめなデザイン(カーソルを合わせると現れるデザイン)にしております。<br>
-- しかし、1度選択したらモチベーションアップのため目立つようにデザインしております。
+<summary>２. Enterキー入力</summary>
+- 入力欄に記入後、Enterキーにてタスクの登録ができるように工夫しました。これにより、素早くタスクの登録が可能です。<br>
+- 入力欄は、日本語入力の際に候補を決定するEnterキー以外のEnterキーを押された場合のみ、登録するようにしております。
+ <!--  function inputEnterSetting(inputElement, callback){
+          let isComposing = false;
+      
+          inputElement.addEventListener("compositionstart", () => { // ユーザーが変換モードを開始
+              isComposing = true;
+          });
+      
+          inputElement.addEventListener("compositionend", () => { // 変換モードが終了して確定された瞬間
+              isComposing = false;
+          });
+      
+          inputElement.addEventListener("keydown", (e) => {
+              if (isComposing) return; // 変換中はEnterを無視
+              if (e.key === "Enter") {
+                  callback(e); // 確定後のEnterで処理実行
+              }
+          });
+      } -->
 </details>
 <br>
 
+<details>
+<summary>3. タスクとサブタスク</summary>
+- タスクを登録後、必要に応じてサブタスクを登録できるよう工夫いたしました。<br>
+<!--      ユーザー「＋」クリック
+           ↓
+    [GroupBtnSetting] のイベント発火
+           ↓
+    subTaskArea 存在？
+       ├─ いいえ → createSubtaskArea() で生成
+       │         ↓
+       │     subInput に Enterイベント設定
+       │         ↓
+       └─ はい（既に存在）
+           ↓
+    subTaskArea の表示切替（.active）
+           ↓
+    ユーザーが subInput に入力 → Enter押下
+           ↓
+    入力値が空？ ── はい → 無視
+           │
+           └─ いいえ
+               ↓
+        createSubtaskLists() 実行
+               ↓
+        subtask(li) を生成して subTaskListUl に追加
+               ↓
+        DelBtn設定（削除可能にする）
+               ↓
+        saveTaskToStorage() で保存
+               ↓
+        画面に表示＋localStorage更新  -->
+</details>
 
--->

@@ -129,6 +129,9 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
 <details>
 <summary>3. タスクとサブタスク</summary>
 - タスクを登録後、必要に応じてサブタスクを登録できるよう工夫いたしました。<br>
+</details>
+<br>
+
 <!--  ユーザー「＋」クリック
            ↓
     [GroupBtnSetting] のイベント発火
@@ -158,5 +161,3 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
                ↓
         画面に表示＋localStorage更新  
   -->
-</details>
-<br>

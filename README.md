@@ -62,7 +62,7 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
       「＋」ボタンをクリックすると、サブタスクの登録が行えます。
     </td>
     <td width="50%">
-      「＋」ボタンをクリックすると、サブタスク入力欄が下部に表示され、サブタスクの登録が行えます。<br>
+      「＋」（または「▼」）ボタンをクリックすると、サブタスク入力欄が下部に表示され、サブタスクの登録が行えます。<br>
       また、タスクが完了したら、「✔︎」ボタンにてタスクを削除できます。<br>
       「▲」ボタンをクリックすると、サブタスクリストが折り畳まれ、視覚的にタスクの整理が可能です。
     </td>
@@ -76,13 +76,13 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
   </tr>
   <tr>
     <td width="50%">
-      <a href="https://gyazo.com/e5a871c59ed67d3f2ad580de40d4d0e8">
-        <img src="https://i.gyazo.com/e5a871c59ed67d3f2ad580de40d4d0e8.gif" alt="Image from Gyazo" width="100%"/>
+      <a href="https://gyazo.com/1aa3efd526ad3fecf7c128defc6efeb4">
+        <img src="https://i.gyazo.com/1aa3efd526ad3fecf7c128defc6efeb4.gif" alt="Image from Gyazo" width="100%"/>
       </a>
     </td>
     <td width="50%">
-      <a href="https://gyazo.com/a1a12135bca036c545c5e8604c4b42a2">
-        <img src="https://i.gyazo.com/a1a12135bca036c545c5e8604c4b42a2.gif" alt="Image from Gyazo" width="100%"/>
+      <a href="https://gyazo.com/09d5eb9bb23f87944045fc885ba2e81f">
+        <img src="https://i.gyazo.com/09d5eb9bb23f87944045fc885ba2e81f.gif" alt="Image from Gyazo" width="100%"/>
       </a>
     </td>
   </tr>

@@ -44,16 +44,18 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
 
 <table width="100%" cellspacing="10">
   <tr>
-    <td width="50%" align="center"><b>ストップウォッチ機能</b></td>
-    <td width="50%" align="center"><b>ブーストモード</b></td>
+    <td width="50%" align="center"><b>タスク登録</b></td>
+    <td width="50%" align="center"><b>サブタスク登録</b></td>
   </tr>
   <tr>
-    <td width="50%"><img src="https://github.com/user-attachments/assets/05a35f3c-0e5a-4c8b-ae21-89b07f9924f1" width="100%"></td>
-    <td width="50%"><img src="https://github.com/user-attachments/assets/898e4b30-7ee1-4bdd-b5b6-5e007797bacc" width="100%"></td>
+    <td width="50%"><img src="https://github.com/user-attachments/assets/80ede405-b4bb-44d3-bf8d-09442f231431" width="100%"></td>
+    <td width="50%"><img src="https://github.com/user-attachments/assets/59e699c0-9326-41cf-b251-0d503ea322b9"  width="100%"></td>
   </tr>
   <tr>
     <td width="50%">「
-      START」「STOP」「RESET」「BOOST(RESETボタンの下)」ボタンがあり、ストップウォッチに合わせて操作可能です。ボタンも直感的に使いやすいように工夫しております。
+      上部の入力欄よりタスクを入力し、Enterキーで登録が行える仕様になっております。<br>
+      また、タスクが完了したら、「✔︎」ボタンにてタスクを削除できます。<br>
+      「＋」ボタンをクリックすると、サブタスクの登録が行えます。
     </td>
     <td width="50%">
       「BOOST(RESETボタンの下)」ボタンをクリックすると、ブーストモードとして下部に偉人やキャラクターの名言がスライドショーとして表示されます。<br>

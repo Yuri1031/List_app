@@ -28,11 +28,15 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
 <table width="100%" cellspacing="10">
   <tr>
     <td width="50%" align="center"><b>カテゴリー画面</b></td>
-    <td width="50%" align="center"><b></b></td>
+    <td width="50%" align="center"><b>カテゴリー画面動作紹介</b></td>
   </tr>
   <tr>
     <td width="50%"><img src="https://github.com/user-attachments/assets/2995641c-05cb-44d8-9a24-c3cd36a04c71" width="100%"></td>
-    <td width="50%"><img src="https://github.com/user-attachments/assets/1fb9be75-fdbc-4ac0-be73-da5b308df40c" width="100%"></td>
+    <td width="50%">
+      <a href="https://gyazo.com/f98a7cd0ccd5e1ff19d9cd66c0cc813e">
+        <img src="https://i.gyazo.com/f98a7cd0ccd5e1ff19d9cd66c0cc813e.gif" alt="Image from Gyazo" width="100%"/>
+      </a>
+    </td>
   </tr>
   <tr>
     <td width="50%">
@@ -52,26 +56,23 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
     <td width="50%"><img src="https://github.com/user-attachments/assets/59e699c0-9326-41cf-b251-0d503ea322b9"  width="100%"></td>
   </tr>
   <tr>
-    <td width="50%">「
+    <td width="50%">
       上部の入力欄よりタスクを入力し、Enterキーで登録が行える仕様になっております。<br>
       また、タスクが完了したら、「✔︎」ボタンにてタスクを削除できます。<br>
       「＋」ボタンをクリックすると、サブタスクの登録が行えます。
     </td>
     <td width="50%">
-      「BOOST(RESETボタンの下)」ボタンをクリックすると、ブーストモードとして下部に偉人やキャラクターの名言がスライドショーとして表示されます。<br>
-      さらに、枠内の「偉人(紳士アイコン)」「キャラクター(本アイコン)」ボタンをクリックすると、カテゴリー毎に名言が表示されます。<br>
-      集中力が切れそうなときに、モチベーションアップとしてご活用ください。<br>
-      例）<br>
-      ・「偉人(紳士アイコン)」ボタン　→ 偉人の名言集。<br>
-      ・「キャラクター(本アイコン)」ボタン　→　漫画の名言集。<br>
+      「＋」ボタンをクリックすると、サブタスク入力欄が下部に表示され、サブタスクの登録が行えます。<br>
+      また、タスクが完了したら、「✔︎」ボタンにてタスクを削除できます。<br>
+      「▲」ボタンをクリックすると、サブタスクリストが折り畳まれ、視覚的にタスクの整理が可能です。
     </td>
   </tr>
 </table>
 
 <table width="100%" cellspacing="10">
   <tr>
-    <td width="50%" align="center"><b>タイマー動作紹介</b></td>
-    <td width="50%" align="center"><b>ストップウォッチ動作紹介</b></td>
+    <td width="50%" align="center"><b>タスク動作紹介</b></td>
+    <td width="50%" align="center"><b>サブタスク動作紹介</b></td>
   </tr>
   <tr>
     <td width="50%">

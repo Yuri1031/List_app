@@ -205,11 +205,10 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
     <tr>
       <td width="20%" align="left"><b>keydown</b></td>
       <td width="80%" align="left">
-        <b>キーを押したときに発火するイベントを設定。<br>
+        キーを押したときに発火するイベントを設定。<br>
           イベントリスナーで渡される e（イベントオブジェクト）の プロパティ を使って、押されたキーを判定する。<br>
           ・e.key ...キーの意味(文字や機能)を表す。<br>
           ・e.code ...キーの物理的な位置を表す。<br>
-        </b>
       </td>
     </tr>
   </table>
@@ -275,5 +274,49 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
         saveTaskToStorage() で保存
                ↓
         画面に表示＋localStorage更新  
+```
+</details>
+
+<details>
+  <summary>localStrage</summary>
+  - <br>
+
+  <table width="80%" cellspacing="10">
+    <tr>
+      <td width="50%" align="left">localStrage</td>
+      <td width="50%" align="left">
+        Webブラウザにデータを永続的に保存するための仕組みで、ページを閉じたりリロードしてもデータが保持される。<br>
+        削除はユーザーでも行える。(開発ツールから削除可能)<br>
+      </td>
+    </tr>
+  </table>
+
+```javascript
+// todo.js
+function saveTaskToStorage(){
+    const data = {};
+    document.querySelectorAll(".category").forEach(category => {
+        const type = category.dataset.type;
+        const taskEls = category.querySelectorAll(".task");
+        const taskArray = [];
+
+        taskEls.forEach(taskEl => {
+            const title = taskEl.querySelector(".task_text").textContent;
+            const subtasks = [];
+
+            taskEl.querySelectorAll(".subtask_text").forEach(subEl => {
+                subtasks.push(subEl.textContent);
+            });
+
+            const subTaskArea = taskEl.querySelector(".subtask_area");
+            const isOpen = subTaskArea?.classList.contains("active") || false;
+
+            taskArray.push({ title, subtasks, isOpen });
+        });
+        data[type] = taskArray;
+    });
+    localStorage.setItem("tasks", JSON.stringify(data));
+}
+  
 ```
 </details>

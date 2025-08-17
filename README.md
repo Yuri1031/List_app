@@ -113,37 +113,6 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
 </details>
 <br>
 
-<!--  ユーザー「＋」クリック
-           ↓
-    [GroupBtnSetting] のイベント発火
-           ↓
-    subTaskArea 存在？
-       ├─ いいえ → createSubtaskArea() で生成
-       │         ↓
-       │     subInput に Enterイベント設定
-       │         ↓
-       └─ はい（既に存在）
-           ↓
-    subTaskArea の表示切替（.active）
-           ↓
-    ユーザーが subInput に入力 → Enter押下
-           ↓
-    入力値が空？ ── はい → 無視
-           │
-           └─ いいえ
-               ↓
-        createSubtaskLists() 実行
-               ↓
-        subtask(li) を生成して subTaskListUl に追加
-               ↓
-        DelBtn設定（削除可能にする）
-               ↓
-        saveTaskToStorage() で保存
-               ↓
-        画面に表示＋localStorage更新  
-  -->
-<br>
-
 ## ⚪︎Making of this app 
 自身の学習メモとして見返せるように、制作時に気になったことをこちらに残しております。</summary>
 <details>
@@ -212,8 +181,8 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
       
 ```javascript
 　　// todo.js
-   function inputEnterSetting(inputElement, callback){
-      let isComposing = false;　　　　　　　　　　　　　　　　　　　　　// 初めは、isComposing = false と定義する。
+   function inputEnterSetting(inputElement, callback){          // どの入力要素にイベントを付けるか (inputElement) / 実際にキーが押されたときに動かす処理 (callback)
+      let isComposing = false;　　　　　　　　　　　　　　　　　　　　 // 初めは、isComposing = false と定義する。
   
       inputElement.addEventListener("compositionstart", () => { // ユーザーが変換モードを開始すると
           isComposing = true;　　　　　　　　　　　　　　　　　　　　　// isComposing = ture にする
@@ -266,3 +235,46 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
   </table>
 </details>
 
+<details>
+  <summary>タスク・サブタスク構造</summary>
+  - 「Work」「Life」「Hobby」タブをそれぞれクリックすると、タブに対応したビューを<div class="main_list">箇所に表示させる。<br>
+      
+```html
+  ユーザー「＋」クリック
+           ↓
+    [GroupBtnSetting] のイベント発火
+           ↓
+    subTaskArea 存在？
+       ├─ いいえ → createSubtaskArea() で生成
+       │         ↓
+       │     subInput に Enterイベント設定
+       │         ↓
+       └─ はい（既に存在）
+           ↓
+    subTaskArea の表示切替（.active）
+           ↓
+    ユーザーが subInput に入力 → Enter押下
+           ↓
+    入力値が空？ ── はい → 無視
+           │
+           └─ いいえ
+               ↓
+        createSubtaskLists() 実行
+               ↓
+        subtask(li) を生成して subTaskListUl に追加
+               ↓
+        DelBtn設定（削除可能にする）
+               ↓
+        saveTaskToStorage() で保存
+               ↓
+        画面に表示＋localStorage更新  
+```
+<br>
+
+  <table width="80%" cellspacing="10">
+    <tr>
+      <td width="50%" align="left"><img src="https://github.com/user-attachments/assets/5ee68d32-2b4d-440d-a400-7df73ffd8c71" width="100%"/></td>
+      <td width="50%" align="left"><img src="https://github.com/user-attachments/assets/89c58f49-d12a-4e3d-84b6-0b30f3921ef4" width="100%"/></td>
+    </tr>
+  </table>
+</details>

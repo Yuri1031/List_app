@@ -105,26 +105,7 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
 <summary>２. Enterキー入力</summary>
 - 入力欄に記入後、Enterキーにてタスクの登録ができるように工夫しました。これにより、素早くタスクの登録が可能です。<br>
 - 入力欄は、日本語入力の際に候補を決定するEnterキー以外のEnterキーを押された場合のみ、登録するようにしております。
- <!--  function inputEnterSetting(inputElement, callback){
-          let isComposing = false;
-      
-          inputElement.addEventListener("compositionstart", () => { // ユーザーが変換モードを開始
-              isComposing = true;
-          });
-      
-          inputElement.addEventListener("compositionend", () => { // 変換モードが終了して確定された瞬間
-              isComposing = false;
-          });
-      
-          inputElement.addEventListener("keydown", (e) => {
-              if (isComposing) return; // 変換中はEnterを無視
-              if (e.key === "Enter") {
-                  callback(e); // 確定後のEnterで処理実行
-              }
-          });
-      } -->
 </details>
-<br>
 
 <details>
 <summary>3. タスクとサブタスク</summary>
@@ -161,8 +142,9 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
                ↓
         画面に表示＋localStorage更新  
   -->
+<br>
 
-  ## ⚪︎Making of this app 
+## ⚪︎Making of this app 
 自身の学習メモとして見返せるように、制作時に気になったことをこちらに残しております。</summary>
 <details>
   <summary>非同期処理による、画面の入れ替え</summary>
@@ -217,6 +199,67 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
           「どの要素を対象にするか」を紐づけるための目印として使われている。<br>
           htmlで「data-target(←属性名)=""」と記載し、呼び出すときはJSに「要素.dataset.属性名」で呼び出す。<br>
           例）data-target="work-list" → 要素.dataset.target
+        </b>
+      </td>
+    </tr>
+  </table>
+</details>
+
+<details>
+  <summary>keydownによるEnterキー入力と日本語変換モード対応</summary>
+  - 入力欄に入力しEnterキーを押すとタスクの入力が完了する。それにあたって、決定キーを「Enter」に設定した。<br>
+  　しかし、Enterキーには、日本語入力の漢字確定を行うEnterと、今回設定する登録のためのEnterの2種類を分ける必要がある。<br>
+      
+```javascript
+　　// todo.js
+   function inputEnterSetting(inputElement, callback){
+      let isComposing = false;　　　　　　　　　　　　　　　　　　　　　// 初めは、isComposing = false と定義する。
+  
+      inputElement.addEventListener("compositionstart", () => { // ユーザーが変換モードを開始すると
+          isComposing = true;　　　　　　　　　　　　　　　　　　　　　// isComposing = ture にする
+      });
+  
+      inputElement.addEventListener("compositionend", () => { // 変換モードが終了して確定された瞬間
+          isComposing = false;　　　　　　　　　　　　　　　　　　　// isComposing = false にする
+      });
+  
+      inputElement.addEventListener("keydown", (e) => {
+          if (isComposing) return; 　　　　　　　　　　// isComposing = ture の場合、処理を実行しない。
+          if (e.key === "Enter") {                 // （isComposing = false で）Enterキーを押された場合、
+              callback(e);          　　　　        // (e)の処理を実行
+          }
+      });
+    } 
+```
+<br>
+  <table width="80%" cellspacing="10">
+    <tr>
+      <td width="20%" align="left"><b>keydown</b></td>
+      <td width="80%" align="left">
+        <b>キーを押したときに発火するイベントを設定。<br>
+          イベントリスナーで渡される e（イベントオブジェクト）の プロパティ を使って、押されたキーを判定する。<br>
+          ・e.key ...キーの意味(文字や機能)を表す。<br>
+          ・e.code ...キーの物理的な位置を表す。<br>
+        </b>
+      </td>
+    </tr>
+  </table>
+
+  <table width="80%" cellspacing="10">
+    <tr>
+      <td width="20%" align="left"><b>compositionstart</b></td>
+      <td width="80%" align="left">
+        <b>ユーザーが変換モードを開始した瞬間に発火するイベントを設定。<br>
+        </b>
+      </td>
+    </tr>
+  </table>
+
+  <table width="80%" cellspacing="10">
+    <tr>
+      <td width="20%" align="left"><b>compositionend</b></td>
+      <td width="80%" align="left">
+        <b>ユーザーが変換モードを終了し、入力が確定した瞬間に発火するイベントを設定。<br>
         </b>
       </td>
     </tr>

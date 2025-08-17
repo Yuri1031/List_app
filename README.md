@@ -1,4 +1,4 @@
-# ⚪︎ToDo List 機能　（作成中）
+# ⚪︎ToDo List 機能
 <br>
 
 
@@ -161,3 +161,65 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
                ↓
         画面に表示＋localStorage更新  
   -->
+
+  ## ⚪︎Making of this app 
+自身の学習メモとして見返せるように、制作時に気になったことをこちらに残しております。</summary>
+<details>
+  <summary>非同期処理による、画面の入れ替え</summary>
+  - 「Work」「Life」「Hobby」タブをそれぞれクリックすると、タブに対応したビューを<div class="main_list">箇所に表示させる。<br>
+      
+```html
+　　// index.html
+   <div class="contents">
+        <div class="header">
+            <button class="head tab_work active" id="tabWork" data-target="work-list">Work</button>
+            <button class="head tab_life" id="tabLife" data-target="life-list">Life</button>
+            <button class="head tab_hobby" id="tabHobby" data-target="hobby-list">Hobby</button>
+        </div>
+
+        <div class="main">
+          <div class="add_list">
+            <input type="text" placeholder="add your task and push the enter" id="add_task">
+          </div>
+
+          <div class="main_list"></div>
+        </div>
+  </div>
+```
+<br>
+
+```javascript
+   //switch.js
+   document.querySelectorAll(".head").forEach(btn => {　　　　　　　// ".head" クラスを持つ全ての要素を取得し、それぞれbtnと定義し、{}内の処理を行う。
+      btn.addEventListener("click",()=>{　　            　　　　　　// btnがクリックされた時のイベントを登録。
+          document.querySelectorAll(".head").forEach(tab => {    // ".head" クラスを持つ全ての要素を取得し、それぞれtabと定義し、{}内の処理を行う。
+              tab.classList.remove("active");                    // tabのクラス名から"active"を削除。
+          });
+          // list
+          document.querySelectorAll(".main_list .category").forEach(list => {    // ".main_list"の".category"クラスを持つ全ての要素を取得し、それぞれlistと定義し、{}内の処理を行う。
+              list.classList.remove("active");　　            　　　　　        　 // listのクラス名から"active"を削除。
+          });
+          
+          btn.classList.add("active");　　                   　　　　　        　  // btnのクラス名に"active"を追加。
+          
+          const targetList = document.querySelector(`.${btn.dataset.target}`);　// data-targetの値をクラス名とした要素を取得
+          if (targetList) {                                                    // btn(クラス".head"とつく要素)クリック時に、
+              targetList.classList.add("active");                              // targetListがあれば、クラス名にactiveを追加する。
+          }
+      });            
+  　});
+```
+  <table width="80%" cellspacing="10">
+    <tr>
+      <td width="20%" align="left"><b>data-target</b></td>
+      <td width="80%" align="left">
+        <b>HTML要素に自由にデータを持たせるための属性のひとつ。<br>
+          「どの要素を対象にするか」を紐づけるための目印として使われている。<br>
+          htmlで「data-target(←属性名)=""」と記載し、呼び出すときはJSに「要素.dataset.属性名」で呼び出す。<br>
+          例）data-target="work-list" → 要素.dataset.target
+        </b>
+      </td>
+    </tr>
+  </table>
+</details>
+

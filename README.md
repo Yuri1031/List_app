@@ -236,10 +236,17 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
 </details>
 
 <details>
-  <summary>タスク・サブタスク構造</summary>
-  - 「Work」「Life」「Hobby」タブをそれぞれクリックすると、タブに対応したビューを<div class="main_list">箇所に表示させる。<br>
-      
-```html
+  <summary>サブタスク構造</summary>
+  - 「＋」ボタンをクリックすると、入力欄とサブタスクエリアが表示される。以下、構造を自分用に残しております。<br>
+
+  <table width="80%" cellspacing="10">
+    <tr>
+      <td width="50%" align="left"><img src="https://github.com/user-attachments/assets/5ee68d32-2b4d-440d-a400-7df73ffd8c71" width="100%"/></td>
+      <td width="50%" align="left"><img src="https://github.com/user-attachments/assets/89c58f49-d12a-4e3d-84b6-0b30f3921ef4" width="100%"/></td>
+    </tr>
+  </table>
+
+  ```html
   ユーザー「＋」クリック
            ↓
     [GroupBtnSetting] のイベント発火
@@ -269,12 +276,4 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
                ↓
         画面に表示＋localStorage更新  
 ```
-<br>
-
-  <table width="80%" cellspacing="10">
-    <tr>
-      <td width="50%" align="left"><img src="https://github.com/user-attachments/assets/5ee68d32-2b4d-440d-a400-7df73ffd8c71" width="100%"/></td>
-      <td width="50%" align="left"><img src="https://github.com/user-attachments/assets/89c58f49-d12a-4e3d-84b6-0b30f3921ef4" width="100%"/></td>
-    </tr>
-  </table>
 </details>

@@ -210,18 +210,12 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
           ・e.code ...キーの物理的な位置を表す。<br>
       </td>
     </tr>
-  </table>
-
-  <table width="80%" cellspacing="10">
     <tr>
       <td width="20%" align="left"><b>compositionstart</b></td>
       <td width="80%" align="left">
         ユーザーが変換モードを開始した瞬間に発火するイベントを設定。<br>
       </td>
     </tr>
-  </table>
-
-  <table width="80%" cellspacing="10">
     <tr>
       <td width="20%" align="left"><b>compositionend</b></td>
       <td width="80%" align="left">
@@ -320,6 +314,12 @@ function saveTaskToStorage(){
         削除はユーザーでも行える。(開発ツールから削除可能)<br>
       </td>
     </tr>
+     <tr>
+      <td width="20%" align="left">.push</td>
+      <td width="80%" align="left">
+        配列の末尾に追加するメソッド。<br>
+      </td>
+    </tr>
   </table>
   
 ```javascript
@@ -340,12 +340,4 @@ function saveTaskToStorage(){
 　// 文字列をオブジェクトにして保存（JSON.parse）
  const restored = JSON.parse(localStorage.getItem("user")); // userデータを復元
 ```
-  <table width="80%" cellspacing="10">
-    <tr>
-      <td width="20%" align="left">.push</td>
-      <td width="80%" align="left">
-        配列の末尾に追加するメソッド。<br>
-      </td>
-    </tr>
-  </table>
 </details>

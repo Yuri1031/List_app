@@ -333,11 +333,12 @@ function saveTaskToStorage(){
 　// 削除
 　localStorage.removeItem("key");
 
-　// 例）オブジェクトを文字列にして保存
+　// オブジェクトを文字列にして保存（JSON.stringify）
 　const obj = { name: "Taro", age: 20 };
-　localStorage.setItem("user", JSON.stringify(obj)); // 保存
-　const restored = JSON.parse(localStorage.getItem("user")); // 復元
+　localStorage.setItem("user", JSON.stringify(obj)); // userデータを保存
 
+　// 文字列をオブジェクトにして保存（JSON.parse）
+ const restored = JSON.parse(localStorage.getItem("user")); // userデータを復元
 ```
   <table width="80%" cellspacing="10">
     <tr>

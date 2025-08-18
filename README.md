@@ -164,11 +164,10 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
     <tr>
       <td width="20%" align="left"><b>data-target</b></td>
       <td width="80%" align="left">
-        <b>HTML要素に自由にデータを持たせるための属性のひとつ。<br>
-          「どの要素を対象にするか」を紐づけるための目印として使われている。<br>
-          htmlで「data-target(←属性名)=""」と記載し、呼び出すときはJSに「要素.dataset.属性名」で呼び出す。<br>
-          例）data-target="work-list" → 要素.dataset.target
-        </b>
+         HTML要素に自由にデータを持たせるための属性のひとつ。<br>
+        「どの要素を対象にするか」を紐づけるための目印として使われている。<br>
+         htmlで「data-target(←属性名)=""」と記載し、呼び出すときはJSに「要素.dataset.属性名」で呼び出す。<br>
+         例）data-target="work-list" → 要素.dataset.target
       </td>
     </tr>
   </table>
@@ -217,8 +216,7 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
     <tr>
       <td width="20%" align="left"><b>compositionstart</b></td>
       <td width="80%" align="left">
-        <b>ユーザーが変換モードを開始した瞬間に発火するイベントを設定。<br>
-        </b>
+        ユーザーが変換モードを開始した瞬間に発火するイベントを設定。<br>
       </td>
     </tr>
   </table>
@@ -227,8 +225,7 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
     <tr>
       <td width="20%" align="left"><b>compositionend</b></td>
       <td width="80%" align="left">
-        <b>ユーザーが変換モードを終了し、入力が確定した瞬間に発火するイベントを設定。<br>
-        </b>
+        ユーザーが変換モードを終了し、入力が確定した瞬間に発火するイベントを設定。<br>
       </td>
     </tr>
   </table>
@@ -279,44 +276,75 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
 
 <details>
   <summary>localStrage</summary>
-  - <br>
-
-  <table width="80%" cellspacing="10">
-    <tr>
-      <td width="50%" align="left">localStrage</td>
-      <td width="50%" align="left">
-        Webブラウザにデータを永続的に保存するための仕組みで、ページを閉じたりリロードしてもデータが保持される。<br>
-        削除はユーザーでも行える。(開発ツールから削除可能)<br>
-      </td>
-    </tr>
-  </table>
-
+  - カテゴリーごとにタスク・サブタスクの保存を行う。<br>
+  
 ```javascript
 // todo.js
 function saveTaskToStorage(){
-    const data = {};
+    const data = {};        　　　　                 // dataという空の箱を作成。
     document.querySelectorAll(".category").forEach(category => {
         const type = category.dataset.type;
         const taskEls = category.querySelectorAll(".task");
-        const taskArray = [];
+        const taskArray = [];　　 　                // taskArrayという空の箱を作成。
 
         taskEls.forEach(taskEl => {
             const title = taskEl.querySelector(".task_text").textContent;
-            const subtasks = [];
+            const subtasks = [];  　 　            // subtasksという空の箱を作成。
 
             taskEl.querySelectorAll(".subtask_text").forEach(subEl => {
-                subtasks.push(subEl.textContent);
+                subtasks.push(subEl.textContent);  // subtasksという箱に"subtask_text"を格納（⭐︎）
             });
 
             const subTaskArea = taskEl.querySelector(".subtask_area");
             const isOpen = subTaskArea?.classList.contains("active") || false;
 
-            taskArray.push({ title, subtasks, isOpen });
+            taskArray.push({ title, subtasks, isOpen });     // taskArrayという箱に"title", "subtasks"（⭐︎）, "isOpen"を格納
         });
-        data[type] = taskArray;
+        data[type] = taskArray;　　　// dataという箱に[カテゴリー(htmlのdata-type=""部分)]ごとにtaskArray(title,subtasks,isOpen)を格納。
     });
-    localStorage.setItem("tasks", JSON.stringify(data));
+    localStorage.setItem("tasks", JSON.stringify(data));　　　// JSON.stringify()でdataを文字列に変換し、tasksという名で保存している。
 }
+
+// localStorage イメージ
+//  └── "tasks" : "{ "work":[...], "life":[...] }" ← dataを文字列化したもの
   
 ```
+
+  <table width="80%" cellspacing="10">
+    <tr>
+      <td width="20%" align="left">localStrage</td>
+      <td width="80%" align="left">
+        Webブラウザにデータを保存するための仕組みで、ページを閉じたりリロードしてもデータが保持される。<br>
+        データは、キーと値を文字列として保存できる。<br>
+        （配列やオブジェクトを保存するにはそのまま保存できないため、「JSON.stringify()」 で文字列に変換して保存する）<br>
+        削除はユーザーでも行える。(開発ツールから削除可能)<br>
+      </td>
+    </tr>
+  </table>
+  
+```javascript
+　// localStrageの使い方
+　// 保存
+　localStorage.setItem("key", "value");
+
+　// 取得
+　localStorage.getItem("key"); 
+
+　// 削除
+　localStorage.removeItem("key");
+
+　// 例）オブジェクトを文字列にして保存
+　const obj = { name: "Taro", age: 20 };
+　localStorage.setItem("user", JSON.stringify(obj)); // 保存
+　const restored = JSON.parse(localStorage.getItem("user")); // 復元
+
+```
+  <table width="80%" cellspacing="10">
+    <tr>
+      <td width="20%" align="left">.push</td>
+      <td width="80%" align="left">
+        配列の末尾に追加するメソッド。<br>
+      </td>
+    </tr>
+  </table>
 </details>

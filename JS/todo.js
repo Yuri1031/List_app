@@ -2,8 +2,6 @@ console.log('connected to todo.js!');
 
 const textInput = document.getElementById("add_task");
 
-
-
 // ------------------------------
 // function
 // ------------------------------

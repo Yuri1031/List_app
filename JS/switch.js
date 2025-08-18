@@ -11,7 +11,6 @@ const hobbyTab = document.getElementById("tabHobby");
 
 document.querySelectorAll(".head").forEach(btn => {
     btn.addEventListener("click",()=>{
-        const target = btn.dataset.target;
         // tabとlist remove "active" 処理
         // tab 
         document.querySelectorAll(".head").forEach(tab => {
@@ -22,11 +21,7 @@ document.querySelectorAll(".head").forEach(btn => {
             list.classList.remove("active");
         });
         
-
-        // tabとlistの add "active" 処理
-        // tab 
         btn.classList.add("active");
-        // list
         
 
         const targetList = document.querySelector(`.${btn.dataset.target}`);

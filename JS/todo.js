@@ -8,6 +8,7 @@ const textInput = document.getElementById("add_task");
 function createTaskLists(text, targetList, subtasks = []){
   const li = document.createElement("li");
     li.classList.add("task");
+    li.draggable = true; 
 
     const taskArea = document.createElement("div");
     taskArea.classList.add("task_area");

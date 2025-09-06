@@ -323,7 +323,7 @@ function saveTaskToStorage(){
   </table>
   
 ```javascript
-　// localStrageの使い方
+　// localStorageの使い方
 　// 保存
 　localStorage.setItem("key", "value");
 
@@ -380,7 +380,7 @@ function saveTaskToStorage(){
 
   <table width="80%" cellspacing="10">
     <tr>
-      <td width="20%" align="left">localStrage</td>
+      <td width="20%" align="left">localStorage</td>
       <td width="80%" align="left">
         Webブラウザにデータを保存するための仕組みで、ページを閉じたりリロードしてもデータが保持される。<br>
         データは、キーと値を文字列として保存できる。<br>
@@ -397,7 +397,7 @@ function saveTaskToStorage(){
   </table>
   
 ```javascript
-　// localStrageの使い方
+　// localStorageの使い方
 　// 保存
 　localStorage.setItem("key", "value");
 

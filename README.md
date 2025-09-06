@@ -343,75 +343,61 @@ function saveTaskToStorage(){
 </details>
 
 <details>
-  <summary></summary>
-  - カテゴリーごとにタスク・サブタスクの保存を行う。<br>
+  <summary>JavaScript Drag & Drop API</summary>
+  - ドラッグアンドドロップによる、タスク並び替え表示。<br>
   
 ```javascript
 // todo.js
-function saveTaskToStorage(){
-    const data = {};        　　　　                 // dataという空の箱を作成。
-    document.querySelectorAll(".category").forEach(category => {
-        const type = category.dataset.type;
-        const taskEls = category.querySelectorAll(".task");
-        const taskArray = [];　　 　                // taskArrayという空の箱を作成。
+function createTaskLists(text, targetList, subtasks = []){
+  const li = document.createElement("li");
+    li.classList.add("task");
+    li.draggable = true; 　// htmlのDrag & Dropしたい場所に「draggable = true」と記載することでDrag & Drop APIが使用可能に。
 
-        taskEls.forEach(taskEl => {
-            const title = taskEl.querySelector(".task_text").textContent;
-            const subtasks = [];  　 　            // subtasksという空の箱を作成。
-
-            taskEl.querySelectorAll(".subtask_text").forEach(subEl => {
-                subtasks.push(subEl.textContent);  // subtasksという箱に"subtask_text"を格納（⭐︎）
-            });
-
-            const subTaskArea = taskEl.querySelector(".subtask_area");
-            const isOpen = subTaskArea?.classList.contains("active") || false;
-
-            taskArray.push({ title, subtasks, isOpen });     // taskArrayという箱に"title", "subtasks"（⭐︎）, "isOpen"を格納
-        });
-        data[type] = taskArray;　　　// dataという箱に[カテゴリー(htmlのdata-type=""部分)]ごとにtaskArray(title,subtasks,isOpen)を格納。
-    });
-    localStorage.setItem("tasks", JSON.stringify(data));　　　// JSON.stringify()でdataを文字列に変換し、tasksという名で保存している。
+    以下、省略
 }
+// ↑ htmlでは以下が作成されている。
+<li class="task" draggable="true">サンプル</li>
 
-// localStorage イメージ
-//  └── "tasks" : "{ "work":[...], "life":[...] }" ← dataを文字列化したもの
-  
+
+// order.js
+document.addEventListener("DOMContentLoaded", () => {
+  const lists = document.querySelectorAll(".todo_lists"); // 全カテゴリー取得
+
+  lists.forEach(list => {
+      list.addEventListener("dragstart", e => {
+          e.target.classList.add("drag");
+      });
+
+      list.addEventListener("dragend", e => {
+          e.target.classList.remove("drag");
+      });
+
+      list.addEventListener("dragover", e => {
+          e.preventDefault();
+          // drag対象物
+          const dragTask = document.querySelector(".drag");
+
+          // drag対象物以外（ドロップされる候補）※ nodeListだとfindメソッドが使用不可のためスプレッド構文で配列にする。
+          let anotherList = [...list.querySelectorAll(".task:not(.drag)")];
+
+          // drag対象物以外（ドロップされるもの）
+          let dropped = anotherList.find((another)=>{
+              // dragした際に対象物が乗った候補
+              return e.clientY <= another.offsetTop + another.offsetHeight / 2;
+          });
+          list.insertBefore(dragTask, dropped);
+      })
+  });
+})
 ```
 
   <table width="80%" cellspacing="10">
     <tr>
-      <td width="20%" align="left">localStorage</td>
+      <td width="20%" align="left">Drag & Drop API</td>
       <td width="80%" align="left">
-        Webブラウザにデータを保存するための仕組みで、ページを閉じたりリロードしてもデータが保持される。<br>
-        データは、キーと値を文字列として保存できる。<br>
-        （配列やオブジェクトを保存するにはそのまま保存できないため、「JSON.stringify()」 で文字列に変換して保存する）<br>
-        削除はユーザーでも行える。(開発ツールから削除可能)<br>
-      </td>
-    </tr>
-     <tr>
-      <td width="20%" align="left">.push</td>
-      <td width="80%" align="left">
-        配列の末尾に追加するメソッド。<br>
+        ① <br>
+        ② <br>
       </td>
     </tr>
   </table>
-  
-```javascript
-　// localStorageの使い方
-　// 保存
-　localStorage.setItem("key", "value");
-
-　// 取得
-　localStorage.getItem("key"); 
-
-　// 削除
-　localStorage.removeItem("key");
-
-　// オブジェクトを文字列にして保存（JSON.stringify）
-　const obj = { name: "Taro", age: 20 };
-　localStorage.setItem("user", JSON.stringify(obj)); // userデータを保存
-
-　// 文字列をオブジェクトにして保存（JSON.parse）
- const restored = JSON.parse(localStorage.getItem("user")); // userデータを復元
-```
 </details>

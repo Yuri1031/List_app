@@ -97,7 +97,7 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
 ### ⚪︎工夫した点
 <details>
 <summary>１. ユーザビリティとデザインの工夫</summary>
-- クリック動作や、トグルリスト表示等、ユーザーがどのボタンを押すべきか視覚的、尚且つ直感的にわかるように工夫いたしました。<br>
+- クリック動作や、トグルリスト表示等、タスクの並び替え等、ユーザーがどのボタンを押すべきか視覚的、尚且つ直感的にわかるように工夫いたしました。<br>
 - 特に、トグルリストボタンは、サブタスクがある場合は「▼」と表示され、ない場合は「+」と表示される仕様になっており、一目でサブタスクがあるのかわかるようになっています。
 </details>
 
@@ -269,7 +269,7 @@ JavaScriptの理解を深めるため、個人的な実践練習として作成�
 </details>
 
 <details>
-  <summary>localStrage</summary>
+  <summary>タスクの保存（localStorage）</summary>
   - カテゴリーごとにタスク・サブタスクの保存を行う。<br>
   
 ```javascript
@@ -323,7 +323,7 @@ function saveTaskToStorage(){
   </table>
   
 ```javascript
-　// localStrageの使い方
+　// localStorageの使い方
 　// 保存
 　localStorage.setItem("key", "value");
 
@@ -340,4 +340,64 @@ function saveTaskToStorage(){
 　// 文字列をオブジェクトにして保存（JSON.parse）
  const restored = JSON.parse(localStorage.getItem("user")); // userデータを復元
 ```
+</details>
+
+<details>
+  <summary>JavaScript Drag & Drop API</summary>
+  - ドラッグアンドドロップによる、タスク並び替え表示。<br>
+  
+```javascript
+// todo.js
+function createTaskLists(text, targetList, subtasks = []){
+  const li = document.createElement("li");
+    li.classList.add("task");
+    li.draggable = true; 　// htmlのDrag & Dropしたい場所に「draggable = true」と記載することでDrag & Drop APIが使用可能に。
+
+    以下、省略
+}
+// ↑ htmlでは以下が作成されている。
+<li class="task" draggable="true">サンプル</li>
+
+
+// order.js
+document.addEventListener("DOMContentLoaded", () => {
+  const lists = document.querySelectorAll(".todo_lists"); // 全カテゴリー取得
+
+  lists.forEach(list => {
+      list.addEventListener("dragstart", e => {
+          e.target.classList.add("drag");
+      });
+
+      list.addEventListener("dragend", e => {
+          e.target.classList.remove("drag");
+      });
+
+      list.addEventListener("dragover", e => {
+          e.preventDefault();
+          // drag対象物
+          const dragTask = document.querySelector(".drag");
+
+          // drag対象物以外（ドロップされる候補）※ nodeListだとfindメソッドが使用不可のためスプレッド構文で配列にする。
+          let anotherList = [...list.querySelectorAll(".task:not(.drag)")];
+
+          // drag対象物以外（ドロップされるもの）
+          let dropped = anotherList.find((another)=>{
+              // dragした際に対象物が乗った候補
+              return e.clientY <= another.offsetTop + another.offsetHeight / 2;
+          });
+          list.insertBefore(dragTask, dropped);
+      })
+  });
+})
+```
+
+  <table width="80%" cellspacing="10">
+    <tr>
+      <td width="20%" align="left">Drag & Drop API</td>
+      <td width="80%" align="left">
+        ① <br>
+        ② <br>
+      </td>
+    </tr>
+  </table>
 </details>
